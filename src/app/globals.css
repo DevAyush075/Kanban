@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --background: #030a0d;
+  --background-alt: #051419;
+  --teal-dark: #072229;
+  --teal-glow: #0d4652;
+  --cyan-bright: #2dd4bf;
+  --cyan-accent: #06b6d4;
+  --yellow-glow: #fbbf24;
+  --yellow-accent: #ffd700;
+  --yellow-dark: #b45309;
+  --foreground: #f0fdfa;
+  --foreground-muted: #94a3b8;
+  --card-bg: rgba(7, 30, 36, 0.7);
+  --card-border: rgba(45, 212, 191, 0.15);
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(13, 70, 82, 0.45) 0%, transparent 60%),
+    radial-gradient(circle at 100% 40%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 0% 80%, rgba(251, 191, 36, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030a0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d4652;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2dd4bf;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(8, 32, 38, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(45, 212, 191, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.glass-pill {
+  background: rgba(13, 70, 82, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(45, 212, 191, 0.25);
+}
+
+/* Glowing text and borders */
+.glow-text-yellow {
+  color: var(--yellow-glow);
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+.glow-text-cyan {
+  color: var(--cyan-bright);
+  text-shadow: 0 0 20px rgba(45, 212, 191, 0.4);
+}
+
+.glow-box-yellow {
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.25);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 30px rgba(45, 212, 191, 0.2);
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Cursor drag sequence animation */
+@keyframes dragCursorPath {
+  0% {
+    top: 48%;
+    left: 18%;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  10% {
+    top: 48%;
+    left: 18%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  30% {
+    top: 48%;
+    left: 18%;
+    transform: scale(0.95);
+  }
+  70% {
+    top: 48%;
+    left: 54%;
+    transform: scale(1.05);
+  }
+  85% {
+    top: 48%;
+    left: 54%;
+    transform: scale(1);
+    opacity: 1;
+  }
+  95%, 100% {
+    top: 48%;
+    left: 54%;
+    opacity: 0;
+  }
+}
+
+@keyframes draggedCardPath {
+  0%, 25% {
+    transform: translate(0, 0);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  70% {
+    transform: translate(250px, 0) rotate(2deg) scale(1.03);
+    box-shadow: 0 15px 35px rgba(45, 212, 191, 0.4);
+  }
+  85% {
+    transform: translate(265px, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  90%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes columnPulse {
+  0%, 50%, 100% {
+    border-color: rgba(45, 212, 191, 0.2);
+    box-shadow: none;
+  }
+  65%, 85% {
+    border-color: rgba(251, 191, 36, 0.8);
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.animate-cursor-drag {
+  animation: dragCursorPath 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-card-drag {
+  animation: draggedCardPath 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-target-column {
+  animation: columnPulse 8s ease-in-out infinite;
+}
