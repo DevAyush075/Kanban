@@ -26,6 +26,7 @@ import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import TaskModal from '@/components/dashboard/TaskModal';
 import ConfirmDeleteModal from '@/components/dashboard/ConfirmDeleteModal';
 import AiPlanModal from '@/components/dashboard/AiPlanModal';
+import AiAssistantPanel from '@/components/dashboard/AiAssistantPanel';
 import KanbanColumn from '@/components/dashboard/KanbanColumn';
 import KanbanTaskCard from '@/components/dashboard/KanbanTaskCard';
 import { getBoardById, type BoardColumnDto } from '@/actions/board';
@@ -64,6 +65,7 @@ export default function IndividualBoardPage() {
   const [taskToDelete, setTaskToDelete] = useState<{ id: string; title: string } | null>(null);
 
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const [isAiAssistantOpen, setIsAiAssistantOpen] = useState(false);
 
   // Drag Overlay Active State
   const [activeTask, setActiveTask] = useState<TaskDto | null>(null);
@@ -353,11 +355,19 @@ export default function IndividualBoardPage() {
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setIsAiModalOpen(true)}
+              onClick={() => setIsAiAssistantOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0d4652] to-[#07252d] border border-[#2dd4bf]/40 text-xs font-semibold text-[#2dd4bf] hover:text-white hover:border-[#2dd4bf] transition-all shadow-[0_0_15px_rgba(45,212,191,0.2)] cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#fbbf24] animate-pulse" />
-              <span>AI Plan Generator</span>
+              <span>AI Assistant</span>
+            </button>
+
+            <button
+              onClick={() => setIsAiModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#0d4652] to-[#07252d] border border-[#2dd4bf]/40 text-xs font-semibold text-[#2dd4bf] hover:text-white hover:border-[#2dd4bf] transition-all shadow-[0_0_15px_rgba(45,212,191,0.2)] cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#fbbf24]" />
+              <span>AI Plan</span>
             </button>
 
             <Link
@@ -496,6 +506,16 @@ export default function IndividualBoardPage() {
           boardId={board.id}
           boardName={board.name}
           onPlanApplied={fetchBoardData}
+        />
+      )}
+
+      {/* AI Assistant Panel */}
+      {board && (
+        <AiAssistantPanel
+          isOpen={isAiAssistantOpen}
+          onClose={() => setIsAiAssistantOpen(false)}
+          boardId={board.id}
+          boardName={board.name}
         />
       )}
     </div>
